@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:layout_marginTop="45dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/icon"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:textSize="25sp"
+        android:layout_marginLeft="5dp"
+        android:layout_height="45dp"
+        android:text="Repo Name"
+        android:id="@+id/reponame" />
+
+    <ImageView
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="55dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/fork" />
+
+    <TextView
+        android:layout_width="80dp"
+        android:textSize="20sp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="105dp"
+        android:layout_height="40dp"
+        android:text="Fork"
+        android:id="@+id/fork" />
+
+    <ImageView
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/watcher" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:textSize="20sp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="225dp"
+        android:layout_height="40dp"
+        android:text="Fork"
+        android:id="@+id/watcher" />
+
+</RelativeLayout>
