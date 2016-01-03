@@ -35,12 +35,7 @@
         android:layout_below="@+id/subscribe"
         android:layout_alignStart="@+id/subscribe" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Update Ur Repo's"
-        android:layout_marginLeft="100dp"
-        android:id="@+id/update"/>
+
 
 
 

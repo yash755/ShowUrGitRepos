@@ -53,12 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        name  = (EditText)findViewById(R.id.editText);
        submit= (Button)findViewById(R.id.submit);
        see   = (Button)findViewById(R.id.see);
-       update= (Button)findViewById(R.id.update);
 
        submit.setOnClickListener(this);
        see.setOnClickListener(this);
-       update.setOnClickListener(this);
-
 
 
 
@@ -105,30 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
 
-            case R.id.update:
-                db = new DatabaseHelper(this);
-                Cursor cr1 = db.getList();
-
-                if(cr1.getCount() != 0) {
-                    cr1.moveToFirst();
-                    final ArrayList<String> fullname = new ArrayList<>();
-                    while (!cr1.isAfterLast()) {
-                        fullname.add(cr1.getString(cr1.getColumnIndex("login")));
-                        cr1.moveToNext();
-
-                    }
-
-                    cr1.close();
-
-                    String username = fullname.get(0).toString();
-                    sendnotifications(username);
-                }
-                else
-                    Toast.makeText(getApplicationContext(), "No Repo's To Update", Toast.LENGTH_SHORT).show();
-
-                break;
-
-
 
         }
     }
@@ -153,17 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray jsonArray) {
-
-                            db = new DatabaseHelper(getApplicationContext());
-                            Cursor c3= db.getList();
-
-                            if(c3.getCount() != 0)
-                                db.removeAll();
-                            c3.close();
-
-
                             inserthere(jsonArray);
-
                             pDialog.hide();
                         }
                     }, new Response.ErrorListener() {
@@ -226,16 +189,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 JSONObject js = object.getJSONObject("owner");
                 String avatar_url= js.getString("avatar_url");
-                String login     = js.getString("login");
+
 
                 Integer forks_count =    (Integer) object.get("forks_count");
                 Integer watchers_count = (Integer) object.get("watchers_count");
 
 
-                System.out.println("I am sucess" + name + forks_count + watchers_count + avatar_url + login);
+                System.out.println("I am sucess" + name + forks_count + watchers_count + avatar_url );
 
 
-                db.insertdata(name, avatar_url, forks_count, watchers_count, full_name, login);
+                db.insertdata(name, avatar_url, forks_count, watchers_count, full_name);
             } catch (JSONException e) {
                 Log.e("SAMPLE", "error getting result " + i, e);
             }

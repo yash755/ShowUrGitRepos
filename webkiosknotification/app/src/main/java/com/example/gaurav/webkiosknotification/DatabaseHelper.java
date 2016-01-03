@@ -21,7 +21,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     public static final String COL_3 = "forks_count";
     public static final String COL_4 = "watchers_count";
     public static final String COL_5 = "full_name";
-    public static final String COL_6 = "login";
+
 
 
 
@@ -34,7 +34,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("create table " + TABLE_NAME + "(name String ,avatar_url String,forks_count Integer,watchers_count Integer,full_name String,login String )");
+        db.execSQL("create table " + TABLE_NAME + "(name String ,avatar_url String,forks_count Integer,watchers_count Integer,full_name String)");
 
     }
 
@@ -46,7 +46,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
     }
 
- public void insertdata(String name,String avatar_url,Integer forks_count,Integer watchers_count,String full_name,String login) {
+ public void insertdata(String name,String avatar_url,Integer forks_count,Integer watchers_count,String full_name) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -55,7 +55,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         contentValues.put(COL_3,forks_count);
         contentValues.put(COL_4,watchers_count);
         contentValues.put(COL_5, full_name);
-        contentValues.put(COL_6,login);
+
 
         db.insert(TABLE_NAME, null, contentValues);
 
@@ -75,10 +75,35 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
 
     public void removeAll() {
-        // db.delete(String tableName, String whereClause, String[] whereArgs);
-        // If whereClause is null, it will delete all rows.
-        SQLiteDatabase db = this.getWritableDatabase(); // helper is object extends SQLiteOpenHelper
+        SQLiteDatabase db = this.getWritableDatabase();
         db.delete(DatabaseHelper.TABLE_NAME, null, null);
+    }
+
+    public void updatedata(String name,String avatar_url,Integer forks_count,Integer watchers_count,String full_name) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cr1 = db.rawQuery("SELECT * FROM repos where name = " + "'" + name + "'", null);
+
+        System.out.println("SELECT * FROM repos where name = " + "'" + name + "'" +"Watchers"+ watchers_count + "Cursor" + cr1.getCount());
+
+
+        if (cr1.getCount() != 0) {
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(COL_1,name);
+            contentValues.put(COL_2,avatar_url);
+            contentValues.put(COL_3,forks_count);
+            contentValues.put(COL_4,watchers_count);
+            contentValues.put(COL_5, full_name);
+
+            System.out.println(TABLE_NAME + contentValues + COL_1 + "=" + "'" + name + "'");
+
+            db.update(TABLE_NAME, contentValues, COL_1 + "=" + "'" + name + "'", null);
+
+            System.out.println("I am update");
+
+        }
     }
 
 
